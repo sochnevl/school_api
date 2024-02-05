@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :students, only: [:create, :destroy, :index]
+
+  resources :schools, only: [] do # тут не уверен
+    resources :school_classes, path: 'classes', only: [:index] do
+      resources :students, only: [:index]
+    end
+  end
 end
