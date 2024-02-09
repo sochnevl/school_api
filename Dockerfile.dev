@@ -1,0 +1,40 @@
+FROM ruby:3.0.0-slim AS build-env
+
+ENV RAILS_ENV=development
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    git \
+    make
+
+WORKDIR /app
+
+COPY Gemfile Gemfile.lock /app/
+
+RUN bundler_version=$(cat Gemfile.lock | grep -A 1 "BUNDLED WITH" | sed -n '2p' | tr -d [:blank:]) \
+    && gem install bundler -v $bundler_version --no-document
+
+RUN bundle install --jobs `getconf _NPROCESSORS_ONLN` --retry=2 --no-cache
+
+COPY . /app
+
+FROM ruby:3.0.0-slim
+
+ENV RAILS_ENV=development
+
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    git \
+    tzdata \
+    curl \
+    postgresql-client
+
+WORKDIR /app
+
+COPY --from=build-env /usr/local/bundle /usr/local/bundle
+COPY --from=build-env /app /app
+
+RUN bundle
+
+EXPOSE 3000

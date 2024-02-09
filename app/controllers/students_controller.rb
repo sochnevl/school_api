@@ -4,6 +4,9 @@ class StudentsController < ApplicationController
     student = Student.new(student_params)
 
     if student.save
+      student_token = student.generate_token
+      response.headers['X-AUTH-TOKEN'] = student_token
+
       render json: student, status: :created, location: student
     else
       render json: student.errors, status: :method_not_allowed
@@ -12,6 +15,11 @@ class StudentsController < ApplicationController
 
   # DELETE /students/:id
   def destroy
+    unless request.headers['X-AUTH-TOKEN'].present?
+      render json: {}, status: :unauthorized
+      return
+    end
+
     student = Student.find(params[:id])
     student.destroy
     render json: {}, status: :ok
@@ -25,7 +33,7 @@ class StudentsController < ApplicationController
     class_group = school.class_groups.find(params[:class_group_id])
     students = class_group.students
 
-    render json: students
+    render json: students, status: :ok
   end
 
   private
