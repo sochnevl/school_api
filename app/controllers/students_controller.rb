@@ -21,7 +21,8 @@ class StudentsController < ApplicationController
 
   # GET /schools/:school_id/classes/:class_group_id/students
   def index
-    class_group = ClassGroup.find(params[:class_group_id])
+    school = School.find(params[:school_id])
+    class_group = school.class_groups.find(params[:class_group_id])
     students = class_group.students
 
     render json: students
