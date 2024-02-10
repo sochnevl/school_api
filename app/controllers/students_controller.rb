@@ -15,12 +15,13 @@ class StudentsController < ApplicationController
 
   # DELETE /students/:id
   def destroy
-    unless request.headers['X-AUTH-TOKEN'].present?
+    student = Student.find(params[:id])
+
+    unless request.headers['X-AUTH-TOKEN'] == student.token
       render json: {}, status: :unauthorized
       return
     end
 
-    student = Student.find(params[:id])
     student.destroy
     render json: {}, status: :ok
   rescue ActiveRecord::RecordNotFound

@@ -1,14 +1,35 @@
 version: '3.7'
 services:
+  db:
+    image: postgres:14.2-alpine
+    container_name: myapp-postgres-14.2
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    command: "postgres -c 'max_connections=500'"
+    environment:
+      POSTGRES_DB: school_api_development
+      POSTGRES_USER: my_user
+      POSTGRES_PASSWORD: my_password
+    ports:
+      - "5432:5432"
   my_service: &my_service
     build:
       context: .
       dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
     command: bash -c "rm tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      DB_HOST: db
+      DB_NAME: school_api_development
+      DB_USERNAME: my_user
+      DB_PASSWORD: my_password
     stdin_open: true
     tty: true
     volumes:
       - .:/app
-
 volumes:
   dbdata: {}
+networks:
+  default:
+    name: school_api_default
