@@ -19,5 +19,29 @@
 1. Установить Docker и Docker Compose, если они еще не установлены.
 2. Склонировать репозиторий:
 
-```bash
-git clone https://github.com/your_username/your_repository.git
+    - Для протокола SSH:
+
+    ```bash
+    git clone git@github.com:sochnevl/school_api.git
+    ```
+
+    - Для HTTPS:
+
+    ```bash
+    git clone https://github.com/sochnevl/school_api.git
+    ```
+
+3. Перейти в директорию проекта:
+	```bash
+	cd school_api
+	```
+4.Запустить проект с помощью Docker Compose:
+	```bash
+	docker-compose up
+	```
+
+После успешного запуска проекта, API будет доступно по адресу http://localhost:3000/
+
+## Обратная связь
+
+Если у вас есть вопросы или предложения по улучшению проекта, пожалуйста, свяжитесь со мной по электронной почте: alexiamxsmart@gmail.com.
