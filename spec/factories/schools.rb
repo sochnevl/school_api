@@ -7,6 +7,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class School < ApplicationRecord
-  has_many :class_groups, dependent: :destroy
+FactoryBot.define do
+  factory :school do
+    name { Faker::Educator.university }
+  end
 end

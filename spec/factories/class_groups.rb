@@ -10,11 +10,12 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-class ClassGroup < ApplicationRecord
-  belongs_to :school
-
-  has_many :students, dependent: :destroy
-
-  validates :number, :letter, :students_count, presence: true
-  validates :students_count, numericality: { greater_than_or_equal_to: 0 }
+FactoryBot.define do
+  factory :class_group do
+    school
+    number { Faker::Number.rand(11) }
+    letter { 'А' }
+    school_id { instance.school.id }
+    students_count { Faker::Number.rand(30) }
+  end
 end
