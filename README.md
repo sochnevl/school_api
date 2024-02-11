@@ -40,6 +40,12 @@
 	docker-compose up
 	```
 
+### Результаты запуска
+
+Ниже приведен скриншот с результатами:
+
+- ![Скриншот 5](screenshots/screenshot5.jpeg)
+
 После успешного запуска проекта, API будет доступно по адресу http://localhost:3000/
 
 ## Тестирование API с помощью Postman
@@ -61,7 +67,6 @@
 - ![Скриншот 2](screenshots/screenshot2.jpeg)
 - ![Скриншот 3](screenshots/screenshot3.jpeg)
 - ![Скриншот 4](screenshots/screenshot4.jpeg)
-
 
 ## Обратная связь
 
