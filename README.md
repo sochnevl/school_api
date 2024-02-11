@@ -57,10 +57,10 @@
 
 Ниже приведены скриншоты с результатами тестирования:
 
-- ![Скриншот 1](screenshots/screenshot1.png)
-- ![Скриншот 2](screenshots/screenshot2.png)
-- ![Скриншот 3](screenshots/screenshot3.png)
-- ![Скриншот 4](screenshots/screenshot4.png)
+- ![Скриншот 1](screenshots/screenshot1.jpeg)
+- ![Скриншот 2](screenshots/screenshot2.jpeg)
+- ![Скриншот 3](screenshots/screenshot3.jpeg)
+- ![Скриншот 4](screenshots/screenshot4.jpeg)
 
 
 ## Обратная связь
